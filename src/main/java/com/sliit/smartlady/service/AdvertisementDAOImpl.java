@@ -14,22 +14,40 @@ import java.util.List;
 public class AdvertisementDAOImpl implements AdvertisementDAO{
 
 	private JdbcTemplate jdbcTemplate;
-	
+
 	public AdvertisementDAOImpl(DataSource datasource)
 	{
 		jdbcTemplate = new JdbcTemplate(datasource);
 	}
 
 	@Override
+	public void SaveOrUpdate(Advertisement advertisement) {
+		// TODO Auto-generated method stub
+
+        /*if(category.getID()>0)
+        {
+            String sql = "UPDATE categories SET catName = ?, catDescription = ? "+
+                    " WHERE catID = ?";
+            jdbcTemplate.update(sql, category.getcatName(), category.getcatDescription(), category.getID());
+        }
+        else*/
+		{
+			String sql = "INSERT INTO advertisement(description) VALUES(?)";
+			jdbcTemplate.update(sql, advertisement.getDescription());
+		}
+
+	}
+
+	@Override
 	public List<Advertisement> getAllAdvertisements() {
 		String sql = "SELECT * FROM advertisements WHERE status = 'Pending' ";
 		List<Advertisement> listAdvertisement = jdbcTemplate.query(sql,  new RowMapper<Advertisement>() {
-			
+
 			@Override
 			public Advertisement mapRow(ResultSet rs, int rowNum) throws SQLException {
-				
+
 				Advertisement lAdvertisement = new Advertisement();
-				
+
 				lAdvertisement.setID((rs.getInt("advID")));
 				lAdvertisement.setDescription(rs.getString("description"));
 				lAdvertisement.setPublishedDate(rs.getString("published_date"));
@@ -37,11 +55,11 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 				lAdvertisement.setPayment(rs.getFloat("payment"));
 				lAdvertisement.setURL(rs.getString("url"));
 				lAdvertisement.setStatus(rs.getString("status"));
-				
+
 				return lAdvertisement;
 			}
 		});
-		
+
 		return listAdvertisement;
 	}
 
@@ -49,26 +67,26 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 	public Advertisement findByID(int advID) {
 		String sql = "SELECT * FROM advertisements WHERE advID = " + advID;
 
-		 return jdbcTemplate.query(sql, new ResultSetExtractor<Advertisement>() {
-			 
-		        @Override
-		        public Advertisement extractData(ResultSet rs) throws SQLException,
-		                DataAccessException {
-		            if (rs.next()) {
-		            	Advertisement advertisement = new Advertisement();
-		            	advertisement.setID((rs.getInt("advID")));
-		            	advertisement.setDescription(rs.getString("description"));
-		            	advertisement.setPublishedDate(rs.getString("published_date"));
-		            	advertisement.setExpiryDate(rs.getString("expiry_date"));
-		            	advertisement.setPayment(rs.getFloat("payment"));
-		            	advertisement.setURL(rs.getString("url"));
-		            	advertisement.setStatus(rs.getString("status"));
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Advertisement>() {
 
-						return advertisement;
-		            }
-		            return null;
-		        }
-		    });
+			@Override
+			public Advertisement extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				if (rs.next()) {
+					Advertisement advertisement = new Advertisement();
+					advertisement.setID((rs.getInt("advID")));
+					advertisement.setDescription(rs.getString("description"));
+					advertisement.setPublishedDate(rs.getString("published_date"));
+					advertisement.setExpiryDate(rs.getString("expiry_date"));
+					advertisement.setPayment(rs.getFloat("payment"));
+					advertisement.setURL(rs.getString("url"));
+					advertisement.setStatus(rs.getString("status"));
+
+					return advertisement;
+				}
+				return null;
+			}
+		});
 	}
 
 	@Override
@@ -81,7 +99,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 	@Override
 	public void updateApprovals(Advertisement[] advertisements) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

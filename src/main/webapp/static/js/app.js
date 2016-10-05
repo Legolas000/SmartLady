@@ -13,6 +13,20 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
         .when('/readarticles', {
             templateUrl: '/static/js/template/reader-template/single-post.html'
         })
+        .when('/assignadvertise', {
+            templateUrl: '/static/js/template/addvertiserPage/requestAdvertise.jsp',
+            controller : "AdvertiserController as adctrl"
+        })
+
+        .when('/advertiserprofile', {
+            templateUrl: '/static/js/template/addvertiserPage/advertiserProfile.jsp',
+            controller : "AdvertiserController as adctrl"
+        })
+
+        .when('/viewUpdateAdvertise', {
+            templateUrl: '/static/js/template/addvertiserPage/viewUpdateAdvertise.jsp',
+            controller : "AdvertiserController"
+        })
         .otherwise({redirectTo:'/home'});
 }]);
 

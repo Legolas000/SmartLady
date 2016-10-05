@@ -713,13 +713,14 @@
 
 	</section>
 	<!-- End heading-news-section -->
+    <button type="button" ng-click="userCtrl.test()"  class="btn btn-warning" >Test Form</button>
 
 	<section class="block-wrapper">
 		<div class="container">
-			<div class="row">
+			<div class="row" ng->
 				<div ng-view></div>
 				<%--<ng-include src="'/static/js/template/reader-template/include/side-bar.html'"></ng-include>--%>
-				<div class="col-sm-4">
+				<div class="col-sm-4" >
 
 					<!-- sidebar -->
 					<div class="sidebar">
@@ -1021,7 +1022,7 @@
 							</form>
 						</div>
 
-						<div class="widget post-widget">
+						<div class="widget post-widget" >
 							<div class="title-section">
 								<h1><span>Featured Video</span></h1>
 							</div>
@@ -1152,9 +1153,9 @@
 <script type="text/javascript" src="/static/js/lib/angular-route.min.js"></script>
 <script type="text/javascript" src="/static/js/app.js"></script>
 <script type="text/javascript" src="/static/js/controller/user_controller.js"></script>
-<%--<script type="text/javascript" src="/static/js/controller/article_controller.js"></script>--%>
+<script type="text/javascript" src="/static/js/controller/advertiser_controller.js"></script>
 <script type="text/javascript" src="/static/js/service/user_service.js"></script>
-<%--<script type="text/javascript" src="/static/js/service/article_service.js"></script>--%>
+<script type="text/javascript" src="/static/js/service/advertiser_service.js"></script>
 
 
 <script type="text/javascript" src="/static/js/magazine-js/jquery.min.js"></script>
